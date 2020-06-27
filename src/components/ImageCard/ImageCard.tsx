@@ -7,10 +7,9 @@ import "./ImageCard.css";
 
 interface IProps {
   image: PhotoObject;
-  onLoadMore?: () => void;
 }
 
-export const ImageCard: React.FC<IProps> = ({ image, onLoadMore }) => {
+export const ImageCard: React.FC<IProps> = ({ image }) => {
   const { name, profile_image } = image.user;
   return (
     <div className="image-card">

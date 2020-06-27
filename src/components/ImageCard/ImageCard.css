@@ -1,5 +1,5 @@
 .image-card {
-  width: 450px;
+  width: 400px;
   margin: 10px;
 }
 
@@ -37,8 +37,8 @@
 }
 
 .image {
-  width: 450px;
-  max-height: 450px;
+  width: 400px;
+  max-height: 400px;
   object-fit: cover;
   vertical-align: middle;
 }

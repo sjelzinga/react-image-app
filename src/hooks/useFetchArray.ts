@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../services/UnsplashAPI";
 import { AxiosResponse } from "axios";
+import { PhotoObject } from "../types";
 
-interface FetchObject<T> {
+interface FetchObject {
   loading: boolean;
-  data: T | null;
+  data: PhotoObject[];
   error: boolean;
 }
 
-type FetchHook = <T>(
+type FetchHook = (
   url: string,
   pageNumber: number,
+  infinite: boolean,
   params?: {}
-) => FetchObject<T>;
+) => FetchObject;
 
-export const useFetch: FetchHook = (url, pageNumber, params) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState(null);
+export const useFetchArray: FetchHook = (url, pageNumber, infinite, params) => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<PhotoObject[]>([]);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     fetch();
   }, [pageNumber]);
 
-  // console.log(params); // {page: 6}
+  // console.log(pageNumber);
 
   const fetch = async (): Promise<void> => {
     setLoading(true);
@@ -31,7 +33,11 @@ export const useFetch: FetchHook = (url, pageNumber, params) => {
       const { data }: AxiosResponse<any> = await axiosClient.get(url, {
         params: { page: pageNumber, ...params },
       });
-      setData(data);
+
+      setData((prev) => {
+        return [...prev, ...data];
+      });
+
       setLoading(false);
     } catch (err) {
       console.log(err);
