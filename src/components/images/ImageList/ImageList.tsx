@@ -5,6 +5,10 @@ import { useFetchArray } from "hooks/useFetchArray";
 import ImageCard from "components/images/ImageCard/ImageCard";
 import "./ImageList.css";
 
+// interface IProps {
+//   listItems: any[]
+// }
+
 export const ImageList = () => {
   const [page, setPage] = useState<number>(2);
   const { data, error } = useFetchArray("/photos", page, true, {
