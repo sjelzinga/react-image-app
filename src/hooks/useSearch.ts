@@ -30,8 +30,6 @@ export const useSearch: FetchHook = (url, pageNumber, query) => {
     fetch();
   }, [pageNumber, query]);
 
-  console.log(pageNumber);
-
   const fetch = async (): Promise<void> => {
     setLoading(true);
     try {

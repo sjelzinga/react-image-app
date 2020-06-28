@@ -13,20 +13,6 @@ interface IProps {
 
 export const ImageList: React.FC<IProps> = (props) => {
   const { nextPage, listItems } = props;
-  // const [page, setPage] = useState<number>(2);
-  // const { data: listItems, error } = useFetchArray("/photos", page, true, {
-  //   per_page: 10,
-  // });
-
-  console.log(listItems);
-
-  // const increasePageNumber = () => {
-  //   nextPage();
-  // };
-
-  // const nextPage = () => {
-  //   // setPage((prev) => prev + 1);
-  // };
 
   const photos = listItems
     ? listItems.map((photoObj) => (

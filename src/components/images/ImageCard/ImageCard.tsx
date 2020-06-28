@@ -42,7 +42,7 @@ const ImageCard: React.FC<IProps> = ({ image }) => {
           <FontAwesomeIcon icon={faHeart} />
           <span className="num-likes">{image.likes}</span>
         </div>
-        <div className="comments">2443 comments</div>
+        {/* <div className="comments">2443 comments</div> */}
       </div>
     </div>
   );
