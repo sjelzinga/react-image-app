@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { axiosClient } from "../services/UnsplashAPI";
 import { AxiosResponse } from "axios";
-import { PhotoObject } from "../types";
+import { PhotoObject, SearchResponseType } from "../types";
 
 interface FetchObject {
   loading: boolean;
+  // data: SearchResponseType | undefined;
   data: PhotoObject[];
   error: boolean;
 }
@@ -12,31 +13,36 @@ interface FetchObject {
 type FetchHook = (
   url: string,
   pageNumber: number,
-  infinite: boolean,
-  query: ""
+  query: string
 ) => FetchObject;
 
 export const useSearch: FetchHook = (url, pageNumber, query) => {
   const [loading, setLoading] = useState<boolean>(true);
+  // const [data, setData] = useState<SearchResponseType>();
   const [data, setData] = useState<PhotoObject[]>([]);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    fetch();
-  }, [pageNumber]);
+    setData([]);
+  }, [query]);
 
-  // console.log(pageNumber);
+  useEffect(() => {
+    fetch();
+  }, [pageNumber, query]);
+
+  console.log(pageNumber);
 
   const fetch = async (): Promise<void> => {
     setLoading(true);
     try {
-      const { data }: AxiosResponse<any> = await axiosClient.get(url, {
-        params: { page: pageNumber, query: query },
-      });
+      const { data }: AxiosResponse<SearchResponseType> = await axiosClient.get(
+        url,
+        {
+          params: { page: pageNumber, query: query, per_page: 20 },
+        }
+      );
 
-      setData((prev) => {
-        return [...prev, ...data];
-      });
+      setData((prev) => [...prev, ...data.results]);
 
       setLoading(false);
     } catch (err) {

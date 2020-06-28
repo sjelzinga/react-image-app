@@ -1,3 +1,15 @@
+// export interface SearchResponseType<T> {
+//   total: number;
+//   total_pages: number;
+//   results: T;
+// }
+
+export interface SearchResponseType {
+  total: number;
+  total_pages: number;
+  results: PhotoObject[];
+}
+
 export interface PhotoObject {
   alt_description: string;
   categories: [];
