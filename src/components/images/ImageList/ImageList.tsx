@@ -1,8 +1,8 @@
-import React, { useState, createRef, useEffect } from "react";
+import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useFetchArray } from "../../hooks/useFetchArray";
-import { ImageCard } from "../ImageCard/ImageCard";
+import { useFetchArray } from "hooks/useFetchArray";
+import ImageCard from "components/images/ImageCard/ImageCard";
 import "./ImageList.css";
 
 export const ImageList = () => {
@@ -12,7 +12,6 @@ export const ImageList = () => {
   });
 
   const increasePageNumber = () => {
-    console.log("in");
     setPage((prev) => prev + 1);
   };
 

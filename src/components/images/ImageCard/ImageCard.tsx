@@ -1,18 +1,31 @@
-import React, { createRef, useCallback } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-import { PhotoObject } from "../../types";
+import { PhotoObject } from "types";
 import "./ImageCard.css";
+import { useHistory } from "react-router-dom";
+import { paths } from "App";
 
-interface IProps {
+interface IProps
+  extends React.DetailedHTMLProps<
+    React.HtmlHTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
   image: PhotoObject;
 }
 
-export const ImageCard: React.FC<IProps> = ({ image }) => {
+const ImageCard: React.FC<IProps> = ({ image }) => {
   const { name, profile_image } = image.user;
+
+  const history = useHistory();
+
+  const showImageDetails = () => {
+    history.push(`${paths.image}/${image.id}`);
+  };
+
   return (
-    <div className="image-card">
+    <div className="image-card" onClick={showImageDetails}>
       <div className="image-card-header">
         <div className="user-profile-photo">
           <img src={profile_image.small} alt="user" />
@@ -34,3 +47,5 @@ export const ImageCard: React.FC<IProps> = ({ image }) => {
     </div>
   );
 };
+
+export default ImageCard;
