@@ -18,9 +18,9 @@ export const SearchInput: React.FC<IProps> = (props) => {
   const { clearField, fieldHasValue, ...rest } = props;
   const inputRef = createRef<HTMLInputElement>();
 
-  useEffect(() => {
-    console.log(inputRef.current.value, "value");
-  });
+  // useEffect(() => {
+  //   // console.log(inputRef.current.value, "value");
+  // });
 
   return (
     <div className="search-input">

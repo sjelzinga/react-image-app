@@ -74,3 +74,28 @@ interface ProfileImage {
   medium: string;
   large: string;
 }
+
+type Color =
+  | "black_and_white"
+  | "black"
+  | "white"
+  | "yellow"
+  | "orange"
+  | "red"
+  | "purple"
+  | "magenta"
+  | "green"
+  | "teal"
+  | "blue";
+
+type Orientation = "landscape" | "portrait" | "squarish";
+
+type SearchType = "photos" | "users" | "collections";
+
+export interface Search {
+  query: string;
+  color?: Color;
+  orientation?: Orientation;
+  submit?: boolean;
+  type?: SearchType;
+}
