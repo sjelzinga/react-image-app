@@ -1,8 +1,23 @@
-.search-form {
+/* .search-form {
   width: 100%;
+}
 
+.search-nav-wrapper {
+  width: 100%;
+  background-color: black;
   display: flex;
   justify-content: center;
+} */
 
-  padding: 20px 0;
+.logo {
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.search-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  padding: 20px;
 }

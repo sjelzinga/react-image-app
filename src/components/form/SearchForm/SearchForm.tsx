@@ -4,7 +4,8 @@ import "./SearchForm.css";
 import { SearchInput } from "../SearchInput/SearchInput";
 import { setFormData } from "store/form/formActions";
 import { AppState } from "store/rootReducer";
-import { Search } from "types";
+import { Search, SearchTypeEnum, SearchType } from "types";
+import { couldStartTrivia } from "typescript";
 
 interface IProps
   extends React.DetailedHTMLProps<
@@ -19,6 +20,7 @@ export const SearchForm: React.FC<IProps> = (props) => {
   const { query } = useSelector<AppState, Search>((state) => state.form.search);
   const [value, setValue] = useState<string>("");
   const [hasValue, setHasValue] = useState<boolean>(false);
+  const [type, setType] = useState<SearchTypeEnum>(SearchTypeEnum.PHOTOS);
 
   useEffect(() => {
     if (query.length > 0) {
@@ -38,9 +40,23 @@ export const SearchForm: React.FC<IProps> = (props) => {
     setHasValue(false);
   };
 
+  const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    switch (value) {
+      case SearchTypeEnum.PHOTOS:
+        setType(value);
+        break;
+      case SearchTypeEnum.USERS:
+        setType(value);
+        break;
+    }
+  };
+
+  // console.log(type);
+
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setFormData({ query: value, type: "photos" }));
+    dispatch(setFormData({ query: value, type }));
   };
 
   const { submit, ...rest } = props;
@@ -53,6 +69,10 @@ export const SearchForm: React.FC<IProps> = (props) => {
           clearField={clear}
           fieldHasValue={hasValue}
         />
+        <select name="type" id="type" onChange={onSelect}>
+          <option value={SearchTypeEnum.PHOTOS}>{SearchTypeEnum.PHOTOS}</option>
+          <option value={SearchTypeEnum.USERS}>{SearchTypeEnum.USERS}</option>
+        </select>
       </form>
     </div>
   );

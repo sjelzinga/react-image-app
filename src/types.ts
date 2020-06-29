@@ -49,7 +49,7 @@ interface URLs {
   thumb: string;
 }
 
-interface User {
+export interface User {
   id: string;
   updated_at: string;
   username: string;
@@ -90,7 +90,12 @@ type Color =
 
 type Orientation = "landscape" | "portrait" | "squarish";
 
-type SearchType = "photos" | "users" | "collections";
+export type SearchType = "photos" | "users" | "collections";
+
+export enum SearchTypeEnum {
+  PHOTOS = "photos",
+  USERS = "users",
+}
 
 export interface Search {
   query: string;
